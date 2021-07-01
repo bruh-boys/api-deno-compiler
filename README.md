@@ -5,19 +5,19 @@ example request:
 in deno:
 
 ```ts
-(async () => {
-  const rawResponse = await fetch("https://api-deno-compiler.elpanajose.repl.co/code", {
-    method: 'POST',
+const rawResponse = await fetch(
+  "https://api-deno-compiler.elpanajose.repl.co/code",
+  {
+    method: "POST",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      "Accept": "application/json",
+      "Content-Type": "application/json",
     },
-      body: JSON.stringify({code: "console.log(Deno)"})
-  });
-  const content = await rawResponse.json();
-  console.log(content)
-
-})();
+    body: JSON.stringify({ code: "console.log(Deno)" }),
+  },
+);
+const content = await rawResponse.json();
+console.log(content);
 ```
 
 in python:
