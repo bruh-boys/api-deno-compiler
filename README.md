@@ -6,7 +6,7 @@ in deno:
 
 ```ts
 (async () => {
-  const rawResponse = await fetch("http://localhost:8000/code", {
+  const rawResponse = await fetch("https://api-deno-compiler.elpanajose.repl.co/code", {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -30,7 +30,7 @@ msg = """
 console.log(Deno)
 """
 
-url = "http://localhost:8000/code"
+url = "https://api-deno-compiler.elpanajose.repl.co/code"
 myobj = {"code":msg}
 
 class ThreadClass(threading.Thread):
