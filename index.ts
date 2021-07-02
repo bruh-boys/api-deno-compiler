@@ -10,8 +10,8 @@ app.get("/", (_, res) => {
 
 app.get("/code", (_, res) => {
   res.send(
-    `<div align="center">make a http post request with the param code, more info in <a href="https://github.com/ELPanaJose/api-deno-compiler">GitHub Repository.</a></div>`,
+    `<div align="center">make a http post request with the parameter code, more info in <a href="https://github.com/ELPanaJose/api-deno-compiler">GitHub Repository.</a></div>`,
   );
 });
 
-app.listen(PORT, () => console.log(`api on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`api on http://localhost:${PORT}`))
