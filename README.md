@@ -17,7 +17,7 @@ const rawResponse = await fetch(
   },
 );
 const content = await rawResponse.json();
-console.log(content);
+console.log(content.out);
 ```
 
 in python:
