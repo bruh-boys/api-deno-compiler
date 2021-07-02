@@ -28,6 +28,7 @@ const code = [
   `console.log(Deno.version)`,
   `console.log("🍱 🦕")`,
   `for(let i=0;i<10;i++){console.log("number:",i)}`,
+  `this would have an error`
 ];
 
 for (let i = 0; i < 10; i++) {
