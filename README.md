@@ -20,6 +20,35 @@ const content = await rawResponse.json();
 console.log(content.out);
 ```
 
+other example with deno, with more requests:
+
+```ts
+const code = [
+  `console.log("hello world")`,
+  `console.log(Deno.version)`,
+  `console.log("🍱 🦕")`,
+  `for(let i=0;i<10;i++){console.log("number:",i)}`,
+];
+
+for (let i = 0; i < 10; i++) {
+  const rawResponse = await fetch(
+    "https://api-deno-compiler.elpanajose.repl.co/code",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        code: `${code[Math.floor(Math.random() * code.length)]}`,
+      }),
+    }
+  );
+  const content = await rawResponse.json();
+  console.log(content.out);
+}
+```
+
 in python:
 
 ```py
