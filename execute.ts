@@ -1,4 +1,1 @@
-
-
-console.log(Deno.version)
- 
+console.log("hello world")

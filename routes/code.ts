@@ -6,7 +6,7 @@ const rateLimit = require("express-rate-limit");
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
   max: 10, // limit 10 request for minute
-  message: "Too many requests from this IP, calm down papi",
+  message: ({out:"HTTP ERROR 429 to many requests"}),
 });
 
 const router = Router();
