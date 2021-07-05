@@ -1,4 +1,4 @@
-<h1>this a simple api that execute your deno code and send you the output, has a rate limit of 60 request per minute</h1>
+<h1>this a simple api that execute your deno code and send you the output, has not limit per request</h1>
 
 example request:
 
