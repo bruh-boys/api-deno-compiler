@@ -20,7 +20,7 @@ router.post("/code", async (req, res) => {
     }
   });
   // exec the code
-  exec(deno,  (_, stdout, stderr) => {
+  exec(deno,{ timeout: 500 },  (_, stdout, stderr) => {
     let out = (stdout || stderr).replace(regex, "");
     console.log(out);
     res.json({ // send the output
