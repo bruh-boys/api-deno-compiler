@@ -106,4 +106,8 @@ func main() {
 	fmt.Printf(sb)
 }
 ```
+<h1>Used in:</h1>
 
+- Deno online compiler : https://deno-online-compiler.herokuapp.com/
+
+- dino-bot : https://github.com/ELPanaJose/dino-bot
