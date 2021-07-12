@@ -61,7 +61,7 @@ code = """
 console.log(Deno.memoryUsage()
 """
 
-r = requests.post(https://api-deno-compiler.herokuapp.com/code",
+r = requests.post("https://api-deno-compiler.herokuapp.com/code",
                   json={"code": code})
 print(r.text)
 ```
