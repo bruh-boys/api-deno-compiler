@@ -12,7 +12,7 @@ import (
 
 	"github.com/acarl005/stripansi"
 	"github.com/gorilla/mux"
-	"github.com/tjarratt/babble"
+	"github.com/zhexuany/wordGenerator"
 )
 
 type code struct {
@@ -50,8 +50,8 @@ func postCode(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("input:", input)
 
 		// create the program
-		babbler := babble.NewBabbler()
-		program := babbler.Babble() + ".ts"
+		program := wordGenerator.GetWord(5)+".ts"
+    fmt.Println(program)
 		f, err := os.Create(program)
 		if err != nil {
 			fmt.Println("some error creating the archive", err)
@@ -68,7 +68,6 @@ func postCode(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("archive edited")
 		var stdout, stderr bytes.Buffer
 		cmd := exec.Command("./deno", "run", "--allow-net", "--no-check", program, "&", "sleep", "0.5;kill", "$! 2>&1")
-		fmt.Println(cmd)
 		cmd.Stdout = &stdout
 		cmd.Stderr = &stderr
 		peo := cmd.Run()
