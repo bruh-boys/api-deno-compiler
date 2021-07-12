@@ -107,6 +107,6 @@ func main() {
 		port = "5000"
 	}
 	fmt.Printf("Api on port: %s", port)
-	http.ListenAndServe(":"+port, nil)
+	http.ListenAndServe(":"+port, r)
 
 }
