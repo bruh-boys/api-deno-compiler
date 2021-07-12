@@ -6,7 +6,7 @@ in deno:
 
 ```ts
 const rawResponse = await fetch(
-    "https://api-deno-compiler.elpanajose.repl.co/code",
+    "https://api-deno-compiler.herokuapp.com/code",
     {
       method: "POST",
       headers: {
@@ -35,7 +35,7 @@ const code = [
 
 for (let i = 0; i < 10; i++) {
   const rawResponse = await fetch(
-    "https://api-deno-compiler.elpanajose.repl.co/code",
+    "https://api-deno-compiler.herokuapp.com/code",
     {
       method: "POST",
       headers: {
@@ -61,7 +61,7 @@ code = """
 console.log(Deno.memoryUsage()
 """
 
-r = requests.post("https://api-deno-compiler.elpanajose.repl.co/code",
+r = requests.post(https://api-deno-compiler.herokuapp.com/code",
                   json={"code": code})
 print(r.text)
 ```
@@ -86,7 +86,7 @@ func main() {
 		"code": "console.log(Deno.version)",
 	})
 	responseBody := bytes.NewBuffer(postBody)
-	resp, err := http.Post("https://api-deno-compiler.elpanajose.repl.co/code", "application/json", responseBody)
+	resp, err := http.Post("https://api-deno-compiler.herokuapp.com/code", "application/json", responseBody)
 	if err != nil {
 		log.Fatalf("An Error Occured %v", err)
 	}
