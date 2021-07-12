@@ -65,7 +65,7 @@ func postCode(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("archive edited")
 		var stdout, stderr bytes.Buffer
 		cmd := exec.Command("sh", "-c", `
-	./deno run --allow-net --no-check prog.ts& sleep 1;kill $! 2>&1`)
+	./deno run --allow-net --no-check prog.ts& sleep 0.5;kill $! 2>&1`)
 		cmd.Stdout = &stdout
 		cmd.Stderr = &stderr
 		peo := cmd.Run()
