@@ -6,20 +6,21 @@ in deno:
 
 ```ts
 const rawResponse = await fetch(
-    "https://api-deno-compiler.herokuapp.com/code",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        code: `console.log("hello world")`},
-      }),
+  "https://api-deno-compiler.herokuapp.com/code",
+  {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
-  );
-  const content = await rawResponse.json();
-  console.log(content);
+    body: JSON.stringify({
+      code: `console.log(await fetch("https://api-deno-compiler.herokuapp.com/code"))`,
+    }),
+  }
+);
+const content = await rawResponse.json();
+console.log(content);
+
 ```
 
 other example with deno, with more requests:
