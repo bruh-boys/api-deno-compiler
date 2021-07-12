@@ -1,3 +1,4 @@
-node_modules
-*.js
-package-lock.json
+go.sum
+test
+.vscode
+test

@@ -6,18 +6,20 @@ in deno:
 
 ```ts
 const rawResponse = await fetch(
-  "https://api-deno-compiler.herokuapp.com/code",
-  {
-    method: "POST",
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
+    "https://api-deno-compiler.elpanajose.repl.co/code",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        code: `console.log("hello world")`},
+      }),
     },
-    body: JSON.stringify({ code: "console.log(Deno)" }),
-  },
-);
-const content = await rawResponse.json();
-console.log(content.out);
+  );
+  const content = await rawResponse.json();
+  console.log(content);
 ```
 
 other example with deno, with more requests:
@@ -28,12 +30,12 @@ const code = [
   `console.log(Deno.version)`,
   `console.log("🍱 🦕")`,
   `for(let i=0;i<10;i++){console.log("number:",i)}`,
-  `this would have an error`
+  `this would have an error`,
 ];
 
 for (let i = 0; i < 10; i++) {
   const rawResponse = await fetch(
-    "https://api-deno-compiler.herokuapp.com/code",
+    "https://api-deno-compiler.elpanajose.repl.co/code",
     {
       method: "POST",
       headers: {
@@ -43,36 +45,25 @@ for (let i = 0; i < 10; i++) {
       body: JSON.stringify({
         code: `${code[Math.floor(Math.random() * code.length)]}`,
       }),
-    }
+    },
   );
   const content = await rawResponse.json();
-  console.log(content.out);
+  console.log(content);
 }
 ```
 
 in python:
 
 ```py
-import threading
 import requests
 
-msg = """
-console.log(Deno)
+code = """
+console.log(Deno.memoryUsage()
 """
 
-url = "https://api-deno-compiler.herokuapp.com/code"
-myobj = {"code":msg}
-
-class ThreadClass(threading.Thread):
-
-  def run(self):
-    x = requests.post(url, data = myobj)
-    print(x.text)
-
-for i in range(2):
-  t = ThreadClass()
-  t.start()
-
+r = requests.post("https://api-deno-compiler.elpanajose.repl.co/code",
+                  json={"code": code})
+print(r.text)
 ```
 
 in go:
@@ -83,28 +74,26 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
 )
 
 func main() {
+	start := time.Now()
 	postBody, _ := json.Marshal(map[string]string{
-		"code": "console.log(Deno.version)",
+		"code": `console.log("hello world")`,
 	})
 	responseBody := bytes.NewBuffer(postBody)
-	resp, err := http.Post("https://api-deno-compiler.herokuapp.com/code", "application/json", responseBody)
+	resp, err := http.Post("https://api-deno-compiler.elpanajose.repl.co/code", "application/json", responseBody)
 	if err != nil {
-		log.Fatalf("An Error Occured %v", err)
+		log.Fatalf("An Error Occured %v", err, resp)
 	}
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	sb := string(body)
-	fmt.Printf(sb)
+	duration := time.Since(start)
+
+	fmt.Printf("API Response Time: %d%s\n", duration.Milliseconds(), "ms")
 }
+
 ```
 <h1>Used in:</h1>
 
