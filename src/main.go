@@ -8,9 +8,11 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/acarl005/stripansi"
 	"github.com/gorilla/mux"
+	"github.com/tjarratt/babble"
 )
 
 type code struct {
@@ -48,7 +50,8 @@ func postCode(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("input:", input)
 
 		// create the program
-		program := "prog.ts"
+		babbler := babble.NewBabbler()
+		program := babbler.Babble() + ".ts"
 		f, err := os.Create(program)
 		if err != nil {
 			fmt.Println("some error creating the archive", err)
@@ -64,8 +67,8 @@ func postCode(w http.ResponseWriter, r *http.Request) {
 		// execute deno and kill the process
 		fmt.Println("archive edited")
 		var stdout, stderr bytes.Buffer
-		cmd := exec.Command("sh", "-c", `
-	./deno run --allow-net --no-check prog.ts& sleep 0.5;kill $! 2>&1`)
+		cmd := exec.Command("./deno", "run", "--allow-net", "--no-check", program, "&", "sleep", "0.5;kill", "$! 2>&1")
+		fmt.Println(cmd)
 		cmd.Stdout = &stdout
 		cmd.Stderr = &stderr
 		peo := cmd.Run()
@@ -75,8 +78,8 @@ func postCode(w http.ResponseWriter, r *http.Request) {
 		// capture the stderr and stdout
 		executedOut := stdout.String() + stderr.String()
 		noAnsii := stripansi.Strip(executedOut)
-		// fmt.Println(executedOut)
-
+		coolOut := strings.ReplaceAll(noAnsii, "sh: 2: kill: No such process", "")
+		// fmt.Println(coolOut)
 		// delete the archive
 		err = os.Remove(program)
 		if err != nil {
@@ -86,7 +89,7 @@ func postCode(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("archive deleted")
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(noAnsii) // Send the reponse
+		json.NewEncoder(w).Encode(coolOut) // Send the reponse
 	}
 }
 
