@@ -74,6 +74,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
@@ -82,17 +83,25 @@ import (
 func main() {
 	start := time.Now()
 	postBody, _ := json.Marshal(map[string]string{
-		"code": `console.log("hello world")`,
+		"code": "console.log(Deno.version)",
 	})
 	responseBody := bytes.NewBuffer(postBody)
 	resp, err := http.Post("https://api-deno-compiler.elpanajose.repl.co/code", "application/json", responseBody)
 	if err != nil {
-		log.Fatalf("An Error Occured %v", err, resp)
+		log.Fatalf("An Error Occured %v", err)
 	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	sb := string(body)
+	fmt.Printf(sb)
 	duration := time.Since(start)
 
 	fmt.Printf("API Response Time: %d%s\n", duration.Milliseconds(), "ms")
 }
+
 
 ```
 <h1>Used in:</h1>
