@@ -51,7 +51,7 @@ func postCode(w http.ResponseWriter, r *http.Request) {
 
 		// create the program
 		program := wordGenerator.GetWord(5)+".ts"
-    fmt.Println(program)
+                fmt.Println(program)
 		f, err := os.Create(program)
 		if err != nil {
 			fmt.Println("some error creating the archive", err)
