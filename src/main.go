@@ -69,7 +69,6 @@ func postCode(w http.ResponseWriter, r *http.Request) {
 		var stdout, stderr bytes.Buffer
 		cmd := exec.Command("sh", "-c", `
 	./deno run --allow-net --no-check `+noBackQuote+`&`+` sleep 0.5;kill $! 2>&1`)
-		fmt.Println(cmd)
 		cmd.Stdout = &stdout
 		cmd.Stderr = &stderr
 		peo := cmd.Run()
